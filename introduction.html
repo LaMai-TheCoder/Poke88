@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Grid</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #222;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+            grid-template-rows: repeat(auto-fill, minmax(50px, 1fr));
+            width: 100vw;
+            height: 100vh;
+            position: absolute;
+            transition: filter 1s ease-in-out;
+        }
+        .cell {
+            width: 100%;
+            height: 100%;
+            background: #333;
+            transition: background 0.3s, opacity 1s;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            color: white;
+            text-align: center;
+            font-size: 2em;
+            opacity: 0;
+            transition: opacity 1s;
+        }
+        .button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            background: #ff4757;
+            color: white;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 1s;
+            border-top: #ebebeb 2px solid;
+            border-left: #ebebeb 2px solid;
+            border-right: black 2px solid;
+            border-bottom: black 2px solid;
+        }
+        .blurred {
+            filter: blur(5px);
+        }
+        @font-face {
+            font-family: Windows98Font;
+            src: url(font/leviwindows/Windows\ Regular.ttf);
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+            font-family: Windows98Font;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="grid"></div>
+    <div class="content">
+        <img style="width: 602px;" src="img/65d3948a8797f24a03dfdeeba412f6e9.png" alt="">
+        <button style="background-color: #008080; font-family: Windows98Font;" class="button">
+            <a href="register.html">Get Start Now</a>
+        </button>
+    </div>
+    <script>
+        const grid = document.querySelector('.grid');
+        const content = document.querySelector('.content');
+        const button = document.querySelector('.button');
+        let cells = [];
+        let active = false;
+
+        function createGrid() {
+            grid.innerHTML = '';
+            cells = [];
+            const cols = Math.floor(window.innerWidth / 50);
+            const rows = Math.floor(window.innerHeight / 50);
+            grid.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+            grid.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
+            
+            for (let i = 0; i < cols * rows; i++) {
+                let cell = document.createElement('div');
+                cell.classList.add('cell');
+                cell.dataset.index = i;
+                grid.appendChild(cell);
+                cells.push(cell);
+            }
+        }
+        
+        window.addEventListener('resize', createGrid);
+        createGrid();
+
+        function animateGrid(index) {
+            let queue = [index];
+            let visited = new Set();
+            let delay = 0;
+            
+            function getNeighbors(i, cols, rows) {
+                let neighbors = [];
+                let row = Math.floor(i / cols);
+                let col = i % cols;
+                if (row > 0) neighbors.push(i - cols);
+                if (row < rows - 1) neighbors.push(i + cols);
+                if (col > 0) neighbors.push(i - 1);
+                if (col < cols - 1) neighbors.push(i + 1);
+                return neighbors;
+            }
+            
+            const cols = Math.floor(window.innerWidth / 50);
+            const rows = Math.floor(window.innerHeight / 50);
+
+            while (queue.length) {
+                let nextQueue = [];
+                queue.forEach(i => {
+                    if (!visited.has(i)) {
+                        visited.add(i);
+                        setTimeout(() => {
+                            cells[i].style.background = active ? '#333' : `hsl(${Math.random() * 360}, 100%, 60%)`;
+                        }, delay * 50);
+                        nextQueue.push(...getNeighbors(i, cols, rows));
+                    }
+                });
+                queue = nextQueue;
+                delay++;
+            }
+
+            setTimeout(() => {
+                if (!active) {
+                    content.style.opacity = '1';
+                    button.style.opacity = '1';
+                    grid.classList.add('blurred');
+                } else {
+                    content.style.opacity = '0';
+                    button.style.opacity = '0';
+                    grid.classList.remove('blurred');
+                    cells.forEach(cell => cell.style.background = '#333');
+                }
+                active = !active;
+            }, delay * 50 + 500);
+        }
+
+        grid.addEventListener('click', (e) => {
+            if (e.target.classList.contains('cell')) {
+                let index = parseInt(e.target.dataset.index);
+                animateGrid(index);
+            }
+        });
+    </script>
+</body>
+</html>

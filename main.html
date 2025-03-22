@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pokemon Card Picker</title>
+  <style>
+    @font-face {
+      font-family: Windows98Font;
+      src: url(font/leviwindows/Windows\ Regular.ttf);
+    }
+    body { 
+      font-family: Windows98Font; 
+      margin: 20px; 
+      background-color: #008080;
+    }
+    h1 { color: #cc0000; }
+    button { 
+      padding: 10px 20px; 
+      font-size: 1em; 
+      cursor: pointer; 
+      margin-right: 0px; 
+      margin-top: 5px; 
+      border-right: black 2px solid !important;
+      border-bottom: black 2px solid !important;
+      border-top: white 2px solid !important;
+      border-left: white 2px solid !important;
+      background-color: #c0c0c0;
+    }
+    .border-styling {
+      border-right: black 2px solid !important;
+      border-bottom: black 2px solid !important;
+      border-top: white 2px solid !important;
+      border-left: white 2px solid !important;
+      border-radius: 0px !important;
+      padding-left: 5px;
+      transform: translate(-2px, -2px);
+    }
+    #balanceDisplay { margin-bottom: 10px; }
+    
+    /* Main container body */
+    #mainContainerBody {
+      background-color: #c0c0c0;
+      width: 1455px;
+      height: 670px;
+      padding: 0px !important;
+    }
+    #mainContainer2 { padding: 5px; width: 1445px; }
+    
+    /* Top row container for buttons and info board */
+    #topRow {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;  /* Keeps them at the same top level */
+      margin-bottom: 10px;
+    }
+    
+    #cardsMainContainer {
+      overflow-y: scroll;
+      height: 521px;
+    }
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    
+    /* Buttons UI container at 60% width */
+    #buttonsUI {
+      width: 60%;
+    }
+    /* Info board styling at 40% width with fixed height */
+    #cardInfoPanel {
+      width: 40%;
+      height: auto;
+      overflow-y: auto;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      background: #c0c0c0;
+    }
+    #cardInfoPanel h2 { margin-top: 0; }
+    
+    /* Cards container below the top row */
+    #cardsContainer { 
+      display: flex; 
+      flex-wrap: wrap; 
+      gap: 10px; 
+      margin-top: 10px;
+      margin-left: 10px;
+    }
+    .card {
+      width: 150px;
+      height: 150px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: #c0c0c0;
+      cursor: pointer;
+      position: relative;
+    }
+    .card img { 
+      max-width: 80px; 
+      max-height: 80px; 
+      border-radius: 5px; 
+    }
+    .card-name { 
+      margin-top: 5px; 
+      font-size: 0.9em; 
+    }
+    /* Highlight style: when a card is selected, its background becomes #008080 */
+    .highlight {
+      background-color: #008080 !important;
+    }
+    
+    /* Title & Icon styling */
+    #x-icon {
+      width: 20px;
+      height: 20px;
+      transform: translate(1362px, 5.2px);
+    }
+    #titleContainer {
+      height: 30px;
+      width: 1450px;
+      background: linear-gradient(to right, #818181, #bababa);
+      border-right: #585858 1px solid;
+      margin-right: 2px;
+      display: flex;
+      flex-direction: row;
+    }
+    #title {
+      color: white;
+      font-size: 18px;
+      margin-left: 10px;
+      margin-top: 3px;
+    }
+    
+    /* Preview container inside the info board */
+    #previewContainer {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      background: #c0c0c0;
+    }
+    #previewImage img {
+      max-width: 150px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div id="mainContainerBody" class="border-styling" style="padding: 0px !important;">
+    <div id="titleContainer" class="border-styling">
+      <p id="title">Poke88</p>
+      <div id="icons-container">
+        <img id="x-icon" src="img/Screenshot 2025-02-15 232134.png" alt="">
+      </div>
+    </div>
+    <div id="mainContainer2" class="border-styling">
+      <!-- Top row: Buttons (60%) and Info Panel (40%) -->
+      <div id="topRow">
+        <div id="buttonsUI" class="border-styling">
+          <p id="balanceDisplay">Balance: $100.00</p>
+          <button id="getCardsButton">Get 5 Pokemon Cards (-$40)</button>
+          <button id="sellCardsButton">Sell Displayed Cards</button>
+          <button id="storeDataButton">Store All Displayed Cards</button>
+          <!-- Single toggle button: always labeled "Change Display" -->
+          <button id="toggleCardsButton">Change Display</button>
+          <div id="cardsMainContainer">
+            <div id="cardsContainer"></div>
+          </div>
+        </div>
+        <div id="cardInfoPanel" class="border-styling">
+          <h2>Card Information</h2>
+          <p>Select a card to see details here.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="main.js"></script>
+</body>
+</html>

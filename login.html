@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <link rel="stylesheet" href="login.css" />
+</head>
+<body>
+  <div id="primary-container">
+    <div id="secondary-container">
+      <div id="title-container">
+        <p id="title">Login</p>
+        <div id="icons-container">
+          <img id="x-icon" src="img/Screenshot 2025-02-15 232134.png" alt="">
+        </div>
+      </div>
+      <div id="third-container">
+        <div id="main-item1">
+          <img id="key-icon" src="img/key_win_alt-2.png" alt="">
+        </div>
+        <div id="main-item2">
+          <p style="margin-bottom: 19px;">Type a username and password to log in to Poke88.</p>
+          <form id="register-form">
+            <div style="margin-bottom: 6px;">
+              <label style="margin-right: 10px;" for="user-name">Username:</label>
+              <input type="text" id="username" placeholder="Username" />
+            </div>
+            <div>
+              <label style="margin-right: 11.5px;" for="pass-word">Password:</label>
+              <input type="password" id="password" placeholder="Password" />
+            </div>
+          </form>
+        </div>
+        <div id="main-item3" style="padding-right: 21.6px; padding-left: 21.6px;">
+          <button class="register-button">
+            <a href="register.html">Register</a>
+          </button>
+          <button id="skibdi" onclick="login()" class="register-button">Log In</button>
+        </div>
+      </div> 
+    </div>
+  </div>
+</body>
+<script>
+  function login() {
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+
+  // Lay username va password kiem tra xem nguoi da nhap vao chua
+  if (username != "" && password != "") {
+    // Get existing users from localStorage
+    const users = JSON.parse(localStorage.getItem("users")) || {};
+
+    // Check if the username exists and the password is correct
+    if (users[username] === password) {
+      alert("Đăng nhập thành công!");
+      window.location.href = "main.html";
+    } else {
+      alert("Tên đăng nhập hoặc mật khẩu không đúng!");
+    }
+  } else {
+    alert("Vui lòng điền đầy đủ thông tin!");
+  }
+}
+</script>
+</html>

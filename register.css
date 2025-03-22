@@ -1,0 +1,144 @@
+@font-face {
+    font-family: Windows98Font;
+    src: url(font/leviwindows/Windows\ Regular.ttf);
+}
+
+#primary-container {
+    width: 100%;
+    height: 100%;
+    background-color: #008080;
+    margin: 0px;
+    position: relative;
+}
+
+#secondary-container {
+    position: absolute;
+    background-color: #c0c0c0 !important;
+    width: 632px;
+    height: 248px;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    font-family: Windows98Font;
+    border: black 3px solid;
+    border-top-color: #ebebeb;
+    border-left-color: #ebebeb;
+    border-right-color: #404040;
+    border-bottom-color: #404040;
+    cursor: move;
+}
+
+#title-container {
+    height: 27px;
+    width: auto;
+    background: linear-gradient(to right, #000181, #1084d0);
+    margin-right: 2px;
+    display: flex;
+    flex-direction: row;
+}
+
+#title {
+    color: white;
+    font-size: 18px;
+    margin-left: 5px;
+    margin-top: 2px;
+}
+
+#icon-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-right: 5px;
+    margin-top: 2px;
+    width: 50%;
+}
+
+#x-icon {
+    width: 20px;
+    height: 20px;
+    transform: translate(546px, 3.5px);
+}
+
+#third-container {
+    flex-grow: 4;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    padding-top: 15px;
+}
+
+#main-item1 {
+    height: auto;
+    width: 20%;
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+    justify-content: center;
+}
+
+#main-item2 {
+    transform: translateY(-18px);
+    flex-grow: 0.5;
+}
+
+br {
+    height: 10px;
+}
+
+#main-item3 {
+    height: auto;
+    width: 20%;
+}
+
+#key-icon {
+    width: 75px;
+    height: 75px;
+}
+
+#username{
+    border-left: black 2px solid;
+    border-top: black 2px solid;
+    border-bottom: #ededed 2px solid;
+    border-right: #ededed 2px solid;
+    width: 64%;
+}
+
+#password{
+    border-left: black 2px solid;
+    border-top: black 2px solid;
+    border-bottom: #ededed 2px solid;
+    border-right: #ededed 2px solid;
+    width: 64%;
+}
+
+.register-button {
+    font-family: Windows98Font;
+    width: 100%;
+    height: 26px;
+    background-color: #c0c0c0;
+    border-top: #ededed 2px solid;
+    border-left: #ededed 2px solid;
+    border-right: black 2px solid;
+    border-bottom: black 2px solid;
+    margin-bottom: 10px;
+}
+
+.register-button:hover {
+    background-color: #a2a0a0;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+}

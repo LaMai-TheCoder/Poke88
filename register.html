@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register</title>
+  <link rel="stylesheet" href="register.css" />
+</head>
+<body>
+  <div id="primary-container">
+    <div id="secondary-container">
+      <div id="title-container">
+        <p id="title">Register</p>
+        <div id="icons-container">
+          <img id="x-icon" src="img/Screenshot 2025-02-15 232134.png" alt="">
+        </div>
+      </div>
+      <div id="third-container">
+        <div id="main-item1">
+          <img id="key-icon" src="img/key_win_alt-2.png" alt="">
+        </div>
+        <div id="main-item2">
+          <p style="margin-bottom: 19px;">Type a username and password to register to Poke88.</p>
+          <form id="register-form">
+            <div style="margin-bottom: 6px;">
+              <label style="margin-right: 10px;" for="user-name">Username:</label>
+              <input type="text" id="username" placeholder="Username" />
+            </div>
+            <div>
+              <label style="margin-right: 11.5px;" for="pass-word">Password:</label>
+              <input type="password" id="password" placeholder="Password" />
+            </div>
+          </form>
+        </div>
+        <div id="main-item3" style="padding-right: 21.6px; padding-left: 21.6px;">
+          <button class="register-button" id="skibidi" onclick="register()">Register</button>
+          <button class="register-button">
+            <a href="login.html">Log In</a>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+  function register() {
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+
+  if (username && password) {
+    // Get existing users from localStorage or create an empty object
+    let users = JSON.parse(localStorage.getItem("users")) || {};
+
+    // Check if the username already exists
+    if (users[username]) {
+      alert("Tên đăng nhập đã tồn tại!");
+    } else {
+      // Add new user to the users object
+      users[username] = password;
+
+      localStorage.setItem("users", JSON.stringify(users));
+      alert("Đăng ký thành công!");
+      window.location.href = "login.html";
+    }
+  } else {
+    alert("Vui lòng điền đầy đủ thông tin!");
+  }
+}
+</script>
+</html>
